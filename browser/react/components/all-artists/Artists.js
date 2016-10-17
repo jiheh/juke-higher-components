@@ -41,6 +41,13 @@ function FormDecorator (InnerComponent) {
       this.handleChange = this.handleChange.bind(this);
     }
 
+    artistFilter(){
+      const originalArray = this.props.artists;
+      return originalArray.filter(artist => artist.name.includes(this.state.input));
+    }
+ 
+    filteredArry = artistFilter();
+
     handleChange(evt){
       this.setState({input: evt.target.value});
       // console.log(evt);
@@ -49,7 +56,7 @@ function FormDecorator (InnerComponent) {
 
     render(){
       return (
-        <InnerComponent artists={this.props.artists} handleChange={this.handleChange} />
+        <InnerComponent artists={filteredArry} handleChange={this.handleChange} />
       )
     }
   }
