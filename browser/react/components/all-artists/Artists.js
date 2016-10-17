@@ -14,7 +14,7 @@ const DumbArtists = ({artistFilter, artists, handleChange}) => {
         <label htmlFor="post">Search for an artist.</label>
         <input className="form-control" name="post" type="text" onChange={handleChange} />
       </form>
-
+      
       <div className="list-group">
         {
           artistFilter(artists).map(artist => (
@@ -39,12 +39,12 @@ function FormDecorator (InnerComponent) {
         input: ''
       }
       this.handleChange = this.handleChange.bind(this);
-      // console.log(this)
+      this.artistFilter = this.artistFilter.bind(this);
     }
 
     artistFilter(anArr){
       if(this.state.input !== ''){
-        return originalArray.filter(artist => artist.name.includes(this.state.input));
+        return anArr.filter(artist => artist.name.toUpperCase().includes(this.state.input.toUpperCase()));
       } else {
         return anArr;
       }
@@ -52,8 +52,6 @@ function FormDecorator (InnerComponent) {
 
     handleChange(evt){
       this.setState({input: evt.target.value});
-      // console.log(evt);
-      console.log(this.state.input)
     }
 
     render(){
