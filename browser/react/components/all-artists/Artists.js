@@ -4,14 +4,13 @@ import React from 'react';
 import { Link } from 'react-router';
 
 
-function ({artists, handleChange}) {
-
+const DumbArtists = ({artists, handleChange}) => {
   
   return (
     <div>
       <h3>Artists</h3>
 
-       <form className="form-group">
+       <form className="form-group" onSubmit={evt => evt.preventDefault()}>
         <label htmlFor="post">Search for an artist.</label>
         <input className="form-control" name="post" type="text" onChange={handleChange} />
       </form>
@@ -31,20 +30,20 @@ function ({artists, handleChange}) {
   );
 }
 
-export default function FormDecorator (InnerComponent) {
+function FormDecorator (InnerComponent) {
   return class StatefulForm extends React.Component {
 
     constructor (props) {
       super(props);
       this.state = {
-        input = '';
+        input: ''
       }
       this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(evt){
       this.setState({input: evt.target.value});
-      console.log(evt);
+      // console.log(evt);
       console.log(this.state.input)
     }
 
@@ -53,6 +52,7 @@ export default function FormDecorator (InnerComponent) {
         <InnerComponent artists={this.props.artists} handleChange={this.handleChange} />
       )
     }
-
+  }
 }
 
+export default FormDecorator(DumbArtists)
