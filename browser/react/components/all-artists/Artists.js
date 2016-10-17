@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 
-const DumbArtists = ({artists, handleChange}) => {
+const DumbArtists = ({artistFilter, artists, handleChange}) => {
   
   return (
     <div>
@@ -17,7 +17,7 @@ const DumbArtists = ({artists, handleChange}) => {
 
       <div className="list-group">
         {
-          artists.map(artist => (
+          artistFilter(artists).map(artist => (
             <div className="list-group-item" key={ artist.id }>
               <Link to={`/artists/${artist.id}`}>
                 { artist.name }
@@ -38,16 +38,16 @@ function FormDecorator (InnerComponent) {
       this.state = {
         input: ''
       }
-      this.artists = this.props.artists;
       this.handleChange = this.handleChange.bind(this);
       // console.log(this)
-      const filteredArray = this.artistFilter();
     }
 
-    artistFilter(){
-      const originalArray = this.artists;
-      // console.log(this.artists)
-      return originalArray.filter(artist => artist.name.includes(this.state.input));
+    artistFilter(anArr){
+      if(this.state.input !== ''){
+        return originalArray.filter(artist => artist.name.includes(this.state.input));
+      } else {
+        return anArr;
+      }
     }
 
     handleChange(evt){
@@ -58,7 +58,7 @@ function FormDecorator (InnerComponent) {
 
     render(){
       return (
-        <InnerComponent artists={this.props.artists} handleChange={this.handleChange} />
+        <InnerComponent artistFilter={this.artistFilter} artists={this.props.artists} handleChange={this.handleChange} />
       )
     }
   }
