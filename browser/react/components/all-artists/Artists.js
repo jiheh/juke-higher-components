@@ -38,15 +38,17 @@ function FormDecorator (InnerComponent) {
       this.state = {
         input: ''
       }
+      this.artists = this.props.artists;
       this.handleChange = this.handleChange.bind(this);
+      // console.log(this)
+      const filteredArray = this.artistFilter();
     }
 
     artistFilter(){
-      const originalArray = this.props.artists;
+      const originalArray = this.artists;
+      // console.log(this.artists)
       return originalArray.filter(artist => artist.name.includes(this.state.input));
     }
- 
-    filteredArry = artistFilter();
 
     handleChange(evt){
       this.setState({input: evt.target.value});
@@ -56,10 +58,10 @@ function FormDecorator (InnerComponent) {
 
     render(){
       return (
-        <InnerComponent artists={filteredArry} handleChange={this.handleChange} />
+        <InnerComponent artists={this.props.artists} handleChange={this.handleChange} />
       )
     }
   }
 }
 
-export default FormDecorator(DumbArtists)
+export default FormDecorator(DumbArtists);
