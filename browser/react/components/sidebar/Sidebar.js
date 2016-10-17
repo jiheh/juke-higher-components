@@ -13,8 +13,13 @@ export default function () {
       <section>
         <Link to="/artists" activeClassName="menu-item active" className="menu-item">ARTISTS</Link>
       </section>
+
       <section>
-        <button className="btn example-btn" onClick={}><i className="fa fa-plus"></i>Playlist</button>
+        <button className="btn btn-default">+ Playlist</button>
+      </section>
+
+      <section>
+      
       </section>
     </sidebar>
   );

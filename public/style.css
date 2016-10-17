@@ -18,6 +18,7 @@ sidebar {
   width: inherit;
   overflow-y: auto;
   border-right: 2px solid #555; }
+
   sidebar section a {
     font-size: 18px;
     font-weight: 500;}
@@ -40,6 +41,10 @@ sidebar {
         color: white; }
     sidebar .menu-item.active, sidebar .menu-item:hover {
       border-left: 3px solid #00bc8c; }
+
+  sidebar button {
+    margin: 15px;
+  }
 
 section p a {
   padding: 0 15px;
